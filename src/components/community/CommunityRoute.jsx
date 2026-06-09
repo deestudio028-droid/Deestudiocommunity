@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navigate, Outlet, useNavigate } from 'react-router-dom';
-import supabase from '../../utils/supabase';
+import { supabase } from '../../lib/supabase';
 
 export default function CommunityRoute() {
   const [isAuthorized, setIsAuthorized] = useState(null); // null = loading

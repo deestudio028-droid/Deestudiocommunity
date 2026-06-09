@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Lock, CheckCircle2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import supabase from '../../utils/supabase';
+import { supabase } from '../../lib/supabase';
 
 export default function DSIDModal({ isOpen, onClose }) {
   const [dsId, setDsId] = useState('');
