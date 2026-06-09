@@ -1,17 +1,24 @@
 import { motion } from 'framer-motion';
-
-const stats = [
-  { label: 'Subscribers', value: '39' },
-  { label: 'Community Members', value: '0' },
-  { label: 'Projects Built Together', value: '0' },
-];
+import { useSubscribers } from '../hooks/useSubscribers';
+import { useCommunityMembers } from '../hooks/useCommunityMembers';
+import { useCommunityStats } from '../hooks/useCommunityStats';
 
 export default function Stats() {
+  const { subscribers, loading: subsLoading } = useSubscribers();
+  const { members, loading: membersLoading } = useCommunityMembers();
+  const { stats, loading: statsLoading } = useCommunityStats();
+
+  const displayStats = [
+    { label: 'Subscribers', value: subsLoading ? '...' : subscribers },
+    { label: 'Community Members', value: membersLoading ? '...' : members.length },
+    { label: 'Projects Built Together', value: statsLoading ? '...' : (stats?.projects_built || 0) },
+  ];
+
   return (
     <section className="py-20 relative z-10 border-y border-white/5 bg-black/20 backdrop-blur-sm">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {stats.map((stat, index) => (
+          {displayStats.map((stat, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
